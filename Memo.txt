@@ -1,0 +1,14 @@
+1. createStore
+ - Store : data를 넣는 곳을 의미.
+ - state : 애플리케이션에서 바뀌는 data
+ - reducer : data를 변경하고 수정하는 것을 책임지는 함수 
+   # reducer가 return하는 값은 application의 data
+   # func명이 countModifier이면, count state의 상태를 변경하는 건 countModifier뿐임.
+   
+   const countModifier = (state = 0) => { // state는 default로 0값을 가짐
+    console.log(state); 
+    return state;
+    };
+
+   const countstore = createStore(countModifier); // createStore 생성
+   console.log(countstore.getState()); // getState()를 이용한  countModifier 함수의 return값 받아오기

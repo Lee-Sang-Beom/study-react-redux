@@ -16,26 +16,18 @@
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
 
+import { createStore } from "redux";
+
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
 const span = document.querySelector("span");
 
-let count = 0;
+// createStore : reducer
+const countModifier = (state = 0) => {
+  return state;
+};
 
-const updateText = () => {
-  span.innerText = count;
-}
-const handleAdd = () => {
-  console.log("add");
-  ++count;
-  updateText();
-}
+// createStore
+const countstore = createStore(countModifier);
+console.log(countstore.getState()); 
 
-const handleMinus = () => {
-  console.log("Minus");
-  --count;
-  updateText();
-}
-
-add.addEventListener("click",handleAdd);
-minus.addEventListener("click",handleMinus);
