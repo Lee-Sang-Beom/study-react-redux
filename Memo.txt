@@ -1,5 +1,5 @@
-1. createStore
- - Store : data를 넣는 곳을 의미.
+1. createStore(1)
+ - Store : data를 넣는 곳을 의미. 관리할 데이터의 저장소를 만드는 것이 createStore();
  - state : 애플리케이션에서 바뀌는 data
  - reducer : data를 변경하고 수정하는 것을 책임지는 함수 
    # reducer가 return하는 값은 application의 data
@@ -7,8 +7,50 @@
    
    const countModifier = (state = 0) => { // state는 default로 0값을 가짐
     console.log(state); 
-    return state;
+    return state; # 반환되는 것은 countStore 내의 state값
     };
 
-   const countstore = createStore(countModifier); // createStore 생성
-   console.log(countstore.getState()); // getState()를 이용한  countModifier 함수의 return값 받아오기
+  // 관리할 데이터 저장소 createStore 생성
+   const countstore = createStore(countModifier); 
+
+  // getState()를 이용한  countModifier 함수의 return값 받아오기
+   console.log(countstore.getState()); 
+
+
+
+=====================================================
+
+
+
+2. createStore(2) 
+  // createStore : reducer
+    const countModifier = (count = 0, action) => {
+      if (action.type === "ADD"){
+          return count+1;
+      } else if (action.type === "MINUS"){
+        return count-1;
+    } else{
+      return count; 
+    }
+
+    };
+
+
+  // createStore : countModifier에서 data 관리가 이루어짐
+    const countstore = createStore(countModifier);
+
+  // countModifier에게 메시지를 보내는 방법 : dispatch() 사용 => 단, obj 형식으로 보내야함
+    countstore.dispatch({type:"ADD"});
+    console.log(countstore.getState());
+
+    countstore.dispatch({type:"ADD"});
+    countstore.dispatch({type:"ADD"});
+    countstore.dispatch({type:"ADD"});
+    console.log(countstore.getState());
+
+    countstore.dispatch({type:"MINUS"});
+    console.log(countstore.getState());
+
+
+  const countstore = createStore(countModifier);
+ 

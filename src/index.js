@@ -23,11 +23,26 @@ const minus = document.getElementById("minus");
 const span = document.querySelector("span");
 
 // createStore : reducer
-const countModifier = (state = 0) => {
-  return state;
+const countModifier = (count = 0, action) => {
+  if (action.type === "ADD"){
+      return count+1;
+  } else if (action.type === "MINUS"){
+    return count-1;
+} else{
+  return count;
+}
+
 };
 
 // createStore
 const countstore = createStore(countModifier);
-console.log(countstore.getState()); 
+countstore.dispatch({type:"ADD"});
+console.log(countstore.getState());
 
+countstore.dispatch({type:"ADD"});
+countstore.dispatch({type:"ADD"});
+countstore.dispatch({type:"ADD"});
+console.log(countstore.getState());
+
+countstore.dispatch({type:"MINUS"});
+console.log(countstore.getState());
