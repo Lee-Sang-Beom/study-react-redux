@@ -24,6 +24,7 @@ const span = document.querySelector("span");
 
 // createStore : reducer
 const countModifier = (count = 0, action) => {
+  console.log(count, action);
   if (action.type === "ADD"){
       return count+1;
   } else if (action.type === "MINUS"){
@@ -35,14 +36,21 @@ const countModifier = (count = 0, action) => {
 };
 
 // createStore
-const countstore = createStore(countModifier);
-countstore.dispatch({type:"ADD"});
-console.log(countstore.getState());
+const countStore = createStore(countModifier);
 
-countstore.dispatch({type:"ADD"});
-countstore.dispatch({type:"ADD"});
-countstore.dispatch({type:"ADD"});
-console.log(countstore.getState());
+const onChange = () =>{ // role of observer 
+  span.innerText = countStore.getState();
+}
 
-countstore.dispatch({type:"MINUS"});
-console.log(countstore.getState());
+const handleAdd = () => {
+  countStore.dispatch({ type: "ADD" });
+};
+
+const handleMinus = () => {
+  countStore.dispatch({ type: "MINUS" });
+};
+
+
+countStore.subscribe(onChange); // 변화 감지 시 마다 subscribe 호출
+add.addEventListener("click", handleAdd);
+minus.addEventListener("click", handleMinus);

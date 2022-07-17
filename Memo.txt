@@ -53,4 +53,29 @@
 
 
   const countstore = createStore(countModifier);
- 
+
+
+
+=====================================================
+
+
+3. subscribe
+// createStore
+const countStore = createStore(countModifier);
+
+const onChange = () =>{ // role of observer 
+  span.innerText = countStore.getState();
+}
+
+const handleAdd = () => {
+  countStore.dispatch({ type: "ADD" });
+};
+
+const handleMinus = () => {
+  countStore.dispatch({ type: "MINUS" });
+};
+
+
+countStore.subscribe(onChange); // 변화 감지 시 마다 subscribe 호출
+add.addEventListener("click", handleAdd);
+minus.addEventListener("click", handleMinus);
